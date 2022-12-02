@@ -4,8 +4,12 @@ version = "0.1.0"
 edition = "2021"
 
 [[bin]]
-name="problem"
+name="problem1"
 path="src/problem1.rs"
+
+[[bin]]
+name="problem2"
+path="src/problem2.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
