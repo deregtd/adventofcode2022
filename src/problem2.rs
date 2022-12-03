@@ -37,7 +37,7 @@ fn main() -> std::io::Result<()> {
         pt1score += pt1round;
 
         // part 2 -- calculate what we need to do
-        let mut pt2round: i32 = 0;
+        let pt2round: i32;
         if game[1] == 0 {
             // we need to lose
             let ourcard = if game[0] == 0 { 2 } else { game[0] - 1 };
