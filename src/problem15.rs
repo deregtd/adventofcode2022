@@ -83,19 +83,24 @@ fn main() -> std::io::Result<()> {
     // Part 1 real
     let y_check = 2000000;
 
-    let mut rs = RangeSet::new();
-    for sensor in &sensors {
-        let range = man_dist(sensor.0, sensor.1);
-        let row_range = range - (sensor.0.y - y_check).abs();
-        if row_range > 0 {
-            rs.add((sensor.0.x - row_range, sensor.0.x + row_range));
+    fn rs_from_sensors(y: i32, senslist: &Vec<(Pt, Pt)>) -> RangeSet {
+        let mut rs = RangeSet::new();
+        for sensor in senslist {
+            let range = man_dist(sensor.0, sensor.1);
+            let row_range = range - (sensor.0.y - y).abs();
+            if row_range > 0 {
+                rs.add((sensor.0.x - row_range, sensor.0.x + row_range));
+            }
         }
+        return rs;
     }
+
+    let rs_ycheck = rs_from_sensors(y_check, &sensors);
 
     // println!("RS: {:?}", rs);
 
     let mut cnt: usize = 0;
-    for range in rs.ranges {
+    for range in rs_ycheck.ranges {
         cnt += (range.1 - range.0) as usize + 1;
     }
 
@@ -110,20 +115,12 @@ fn main() -> std::io::Result<()> {
     let outer_bound = 4000000;
 
     for y in 0..=outer_bound {
-        let mut rs = RangeSet::new();
-        for sensor in &sensors {
-            let range = man_dist(sensor.0, sensor.1);
-            let row_range = range - (sensor.0.y - y).abs();
-            if row_range > 0 {
-                rs.add((sensor.0.x - row_range, sensor.0.x + row_range));
-            }
-        }
+        let mut rs_y = rs_from_sensors(y, &sensors);
+        rs_y.clip(0, outer_bound);
 
-        rs.clip(0, outer_bound);
-
-        if rs.ranges.len() == 2 {
-            let x = rs.ranges[0].1 + 1;
-            println!("Pt 2: ({:?}, {:?}) -> {:?}", x, y, (x as usize)*4000000 + y as usize);
+        if rs_y.ranges.len() == 2 {
+            let x = rs_y.ranges[0].1 + 1;
+            println!("Part 2: ({:?}, {:?}) -> {:?}", x, y, (x as usize)*4000000 + y as usize);
         }
     }
 
