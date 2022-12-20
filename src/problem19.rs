@@ -7,9 +7,9 @@ const RESOURCE_ITER: [usize;4] = [0,1,2,3];
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 enum Resource {
-    Ore = 0,
-    Clay = 1,
-    Obsidian = 2,
+    // Ore = 0,
+    // Clay = 1,
+    // Obsidian = 2,
     Geode = 3,
 }
 

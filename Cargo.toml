@@ -83,6 +83,10 @@ path="src/problem18.rs"
 name="problem19"
 path="src/problem19.rs"
 
+[[bin]]
+name="problem20"
+path="src/problem20.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
