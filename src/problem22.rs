@@ -77,8 +77,7 @@ fn main() -> std::io::Result<()> {
     }).collect::<Vec<_>>();
     // println!("{:?}", board);
 
-    let mut width: usize = 0;
-    board.iter().for_each(|r| { if r.len() > width { width = r.len(); } });
+    let width = board.iter().max_by_key(|r| r.len()).unwrap().len();
     let height = board.len();
 
     // Precalc wraparounds
